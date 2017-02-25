@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.badlogic.gdx.graphics.glutils.HdpiUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
@@ -414,7 +415,7 @@ public final class PostProcessor implements Disposable {
 	/** Restores the previously set viewport if one was specified earlier and the destination buffer is the screen */
 	protected static void restoreViewport (FrameBuffer dest) {
 		if (hasViewport && dest == null) {
-			Gdx.gl.glViewport((int)viewport.x, (int)viewport.y, (int)viewport.width, (int)viewport.height);
+			HdpiUtils.glViewport((int)viewport.x, (int)viewport.y, (int)viewport.width, (int)viewport.height);
 		}
 	}
 
