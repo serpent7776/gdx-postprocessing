@@ -16,12 +16,12 @@
 
 package com.bitfire.postprocessing.filters;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.*;
 import com.bitfire.postprocessing.utils.FullscreenQuad;
-import com.bitfire.utils.Vector4;
 
 /** The base class for any single-pass filter. */
 
@@ -108,20 +108,13 @@ public abstract class Filter<T> {
 		program.end();
 	}
 	
-	// vec4
-	protected void setParam (Parameter param, Vector4 value) {
+	//color
+	protected void setParam (Parameter param, Color value) {
 		program.begin();
-		program.setUniformf(param.mnemonic(), value.x, value.y, value.z, value.w);
+		program.setUniformf(param.mnemonic(), value.r, value.g, value.b, value.a);
 		program.end();
 	}
 	
-	// vec4
-	protected void setParam (String name, Vector4 value) {
-		program.begin();
-		program.setUniformf(name, value.x, value.y, value.z, value.w);
-		program.end();
-	}
-
 	// mat3
 	protected T setParam (Parameter param, Matrix3 value) {
 		program.begin();
@@ -270,7 +263,15 @@ public abstract class Filter<T> {
 		return (T)this;
 	}
 	
-	
+	//color
+	protected T setParam (String name, Color value) {
+		if (!programBegan) {
+			programBegan = true;
+			program.begin();
+		}
+		program.setUniformf(name, value);
+		return (T)this;
+	}
 
 	// mat3
 	protected T setParams (Parameter param, Matrix3 value) {

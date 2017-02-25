@@ -1,8 +1,8 @@
 package com.bitfire.postprocessing.filters;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.bitfire.utils.ShaderLoader;
-import com.bitfire.utils.Vector4;
 
 public final class LightFilter extends Filter<LightFilter> {
 
@@ -43,7 +43,7 @@ public final class LightFilter extends Filter<LightFilter> {
 	}
 	
 	public void SetColor(float r, float g, float b, float a){
-		setParam(Param.Color, new Vector4(r,g,b,a));
+		setParam(Param.Color, new Color(r,g,b,a));
 		endParams();
 	}
 
