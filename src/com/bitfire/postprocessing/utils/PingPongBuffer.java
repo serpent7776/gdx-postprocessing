@@ -169,7 +169,7 @@ public final class PingPongBuffer {
 	}
 
 	/** @return the source texture of the current ping-pong chain. */
-	public Texture getSouceTexture () {
+	public Texture getSourceTexture () {
 		return texSrc;
 	}
 
