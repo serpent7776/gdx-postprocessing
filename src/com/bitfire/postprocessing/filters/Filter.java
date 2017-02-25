@@ -264,7 +264,7 @@ public abstract class Filter<T> {
 	}
 	
 	//color
-	protected T setParam (String name, Color value) {
+	protected T setParams (String name, Color value) {
 		if (!programBegan) {
 			programBegan = true;
 			program.begin();
