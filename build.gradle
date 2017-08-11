@@ -4,7 +4,7 @@ apply plugin: 'maven'
 
 sourceCompatibility = 1.7
 version = '1.0'
-group = 'com.github.Anuken'
+group = 'com.github.serpent7776'
 
 sourceSets.main.java.srcDirs = [ "src/" ]
 
