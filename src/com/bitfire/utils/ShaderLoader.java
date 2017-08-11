@@ -22,6 +22,8 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 
 public final class ShaderLoader{
 
+	private static final String TAG = ShaderLoader.class.getSimpleName();
+
 	public static String BasePath = "";
 	public static boolean Pedantic = true;
 	public static boolean Log = true;
@@ -37,7 +39,7 @@ public final class ShaderLoader{
 				log += " w/ (" + defines.replace("\n", ", ") + ")";
 			}
 			log += "...";
-			Gdx.app.debug("ShaderLoader", "Compiling " + log);
+			Gdx.app.debug(TAG, "Compiling " + log);
 		}
 		String vpSrc = Gdx.files.internal(BasePath + vertexFileName + ".vertex").readString();
 		String fpSrc = Gdx.files.internal(BasePath + fragmentFileName + ".fragment").readString();
@@ -56,7 +58,7 @@ public final class ShaderLoader{
 		ShaderProgram shader = new ShaderProgram(defines + "\n" + vertex, defines + "\n" + fragment);
 
 		if (!shader.isCompiled()) {
-			Gdx.app.error("ShaderLoader", shader.getLog());
+			Gdx.app.error(TAG, shader.getLog());
 			throw new RuntimeException("Error compiling shader: " + shader.getLog());
 		}
 
