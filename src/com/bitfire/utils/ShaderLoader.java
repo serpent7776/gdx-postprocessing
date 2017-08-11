@@ -1,4 +1,5 @@
 /*******************************************************************************
+ * Copyright 2017 Serpent7776
  * Copyright 2012 bmanuel
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,17 +21,19 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 
 public final class ShaderLoader{
+
 	public static String BasePath = "";
 	public static boolean Pedantic = true;
+	public static boolean Log = true;
 
 	public static ShaderProgram fromFile(String vertexFileName, String fragmentFileName){
 		return ShaderLoader.fromFile(vertexFileName, fragmentFileName, "");
 	}
 
 	public static ShaderProgram fromFile(String vertexFileName, String fragmentFileName, String defines){
-		if(Pedantic){
+		if (Log) {
 			String log = "\"" + vertexFileName + "/" + fragmentFileName + "\"";
-			if(defines.length() > 0){
+			if (defines.length() > 0) {
 				log += " w/ (" + defines.replace("\n", ", ") + ")";
 			}
 			log += "...";
@@ -52,7 +55,7 @@ public final class ShaderLoader{
 		ShaderProgram.pedantic = ShaderLoader.Pedantic;
 		ShaderProgram shader = new ShaderProgram(defines + "\n" + vertex, defines + "\n" + fragment);
 
-		if(!shader.isCompiled()){
+		if (!shader.isCompiled()) {
 			Gdx.app.error("ShaderLoader", shader.getLog());
 			throw new RuntimeException("Error compiling shader: " + shader.getLog());
 		}
