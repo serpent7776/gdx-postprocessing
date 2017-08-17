@@ -1,12 +1,13 @@
 /*******************************************************************************
+ * Copyright 2017 Serpent7776
  * Copyright 2012 bmanuel
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,13 +22,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.*;
+import com.badlogic.gdx.utils.Disposable;
 import com.bitfire.postprocessing.utils.FullscreenQuad;
 
 /** The base class for any single-pass filter. */
 
 @SuppressWarnings("unchecked")
-public abstract class Filter<T> {
-	
+public abstract class Filter<T> implements Disposable {
+
 	public static interface Parameter {
 		String mnemonic ();
 
@@ -64,6 +66,7 @@ public abstract class Filter<T> {
 		return (T)this;
 	}
 
+	@Override
 	public void dispose () {
 		program.dispose();
 	}
@@ -97,7 +100,7 @@ public abstract class Filter<T> {
 			program.setUniformf(param.mnemonic(), value);
 			program.end();
 		}catch (Exception e){
-			
+
 		}
 	}
 
@@ -107,14 +110,14 @@ public abstract class Filter<T> {
 		program.setUniformf(param.mnemonic(), value);
 		program.end();
 	}
-	
+
 	//color
 	protected void setParam (Parameter param, Color value) {
 		program.begin();
 		program.setUniformf(param.mnemonic(), value.r, value.g, value.b, value.a);
 		program.end();
 	}
-	
+
 	// mat3
 	protected T setParam (Parameter param, Matrix3 value) {
 		program.begin();
@@ -262,7 +265,7 @@ public abstract class Filter<T> {
 		program.setUniformf(param.mnemonic(), value);
 		return (T)this;
 	}
-	
+
 	//color
 	protected T setParams (String name, Color value) {
 		if (!programBegan) {
