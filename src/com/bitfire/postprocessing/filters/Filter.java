@@ -33,10 +33,9 @@ import com.bitfire.postprocessing.utils.FullscreenQuad;
 @SuppressWarnings("unchecked")
 public abstract class Filter<T> implements Disposable {
 
-	public static interface Parameter {
-		String mnemonic ();
-
-		int arrayElementSize ();
+	public interface Parameter {
+		String mnemonic();
+		int arrayElementSize();
 	}
 
 	protected static final FullscreenQuad quad = new FullscreenQuad();
